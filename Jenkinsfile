@@ -100,7 +100,7 @@ agent any
                         sh 'kubectl apply -f ../microservices/payment/manifests -n $NAMESPACE'
                         sh 'kubectl apply -f ../microservices/shipping/manifests -n $NAMESPACE'
                         sh 'kubectl get ingress -n $NAMESPACE'
-                        sh 'kubectl describe ingress $NAMESPACE'
+                        sh 'kubectl get pods -n $NAMESPACE'
                     }
                 }
             }
