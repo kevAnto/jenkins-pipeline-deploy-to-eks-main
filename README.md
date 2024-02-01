@@ -4,7 +4,7 @@
 
 # Steps for the project
 
-## 1. Create a Keypair that matches your keypair : jenkins-keypair
+## 1. Create a Keypair that matches your keypair
 
 ## 2. Create a Jenkins Server with all the dependencies, libraries and packagies needed.
 

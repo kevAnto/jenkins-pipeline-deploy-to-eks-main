@@ -3,6 +3,5 @@ terraform {
     bucket = "remote-state-app"
     region = "us-east-1"
     key    = "eks/terraform.tfstate"
-    dynamodb_table = "app-table"
   }
 }
