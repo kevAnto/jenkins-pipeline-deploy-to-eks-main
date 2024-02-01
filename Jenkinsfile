@@ -86,6 +86,7 @@ agent any
                         //sh 'kubectl get namespace'
                         //sh 'kubectl create namespace -n $NAMESPACE'
                         sh 'cd ..'
+                        sh 'ls'
                         sh 'pwd'
                         sh 'kubectl apply -f microservices/front-end/manifests -n $NAMESPACE'
                         sh 'kubectl apply -f ./microservices/ingress -n $NAMESPACE'
