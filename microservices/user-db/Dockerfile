@@ -1,0 +1,1 @@
+FROM weaveworksdemos/user-db:0.4.0

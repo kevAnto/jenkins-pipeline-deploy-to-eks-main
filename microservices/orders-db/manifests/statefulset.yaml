@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: orders-db
+spec:
+  selector:
+    matchLabels:
+      app: orders-db
+  serviceName: orders-db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: orders-db
+    spec:
+      containers:
+        - name: orders-db
+          image: mongo:3.4
+          ports:
+            - containerPort: 27017
+              name: mongo
+          securityContext:
+            capabilities:
+              drop: 
+                - all
+              add:
+                - CHOWN
+                - SETGID
+                - SETUID

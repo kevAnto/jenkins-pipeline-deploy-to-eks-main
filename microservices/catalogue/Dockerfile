@@ -1,0 +1,1 @@
+FROM weaveworksdemos/catalogue:0.3.5
