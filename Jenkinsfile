@@ -20,7 +20,8 @@ pipeline {
         NAMESPACE = "sock-shop"
     }
 agent any
-    stage("Create an EKS Cluster") {
+    stages {
+        stage('Create an EKS Cluster') {
             steps {
                 script {
                     dir('terraform') {
@@ -31,7 +32,6 @@ agent any
                 }
             }
         }
-    stages {
         stage('Build') {
             steps { //create a loop somehow??
                 sh 'docker build -t $DOCKER_ID/$DOCKER_IMAGE_CARTS:$DOCKER_TAG ./microservices/carts'
