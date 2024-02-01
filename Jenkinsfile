@@ -47,6 +47,9 @@ agent any
             }
         }
         stage('Run') {
+            environment {
+                DOCKER_TAG = "${BUILD_ID}"
+            }
             steps {
                 sh 'docker network create $BUILD_TAG'
                 sh 'docker run -d --name $DOCKER_IMAGE_CARTS --rm --network $BUILD_TAG $DOCKER_ID/$DOCKER_IMAGE_CARTS:$DOCKER_TAG'
