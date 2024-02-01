@@ -102,6 +102,7 @@ agent any
                         sh 'sleep 30'
                         sh 'kubectl get ingress -n $NAMESPACE'
                         sh 'kubectl get pods -n $NAMESPACE'
+                        sh 'kubectl get svc -n $NAMESPACE'
                     }
                 }
             }
