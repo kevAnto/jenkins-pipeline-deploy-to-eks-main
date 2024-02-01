@@ -46,38 +46,11 @@ agent any
                 sh 'docker build -t $DOCKER_ID/$DOCKER_IMAGE_USER_DB:$DOCKER_TAG ./microservices/user-db'
             }
         }
-        stage('Run') {
-            environment {
-                DOCKER_TAG = "${BUILD_ID}"
-            }
-            steps {
-                sh 'docker network create $BUILD_TAG'
-                sh 'docker run -d --name $DOCKER_IMAGE_CARTS --rm --network $BUILD_TAG $DOCKER_ID/$DOCKER_IMAGE_CARTS:$DOCKER_TAG'
-                sh 'docker stop $DOCKER_IMAGE_CARTS'
-                sh 'docker run -d --name $DOCKER_IMAGE_CATALOGUE --rm --network $BUILD_TAG $DOCKER_ID/$DOCKER_IMAGE_CATALOGUE:$DOCKER_TAG'
-                sh 'docker stop $DOCKER_IMAGE_CATALOGUE'
-                sh 'docker run -d --name $DOCKER_IMAGE_CATALOGUE_DB --env MYSQL_RANDOM_ROOT_PASSWORD=yes --env MYSQL_DATABASE=socksdb --rm --network $BUILD_TAG $DOCKER_ID/$DOCKER_IMAGE_CATALOGUE_DB:$DOCKER_TAG'
-                sh 'docker stop $DOCKER_IMAGE_CATALOGUE_DB'
-                sh 'docker run -d --name $DOCKER_IMAGE_FRONT_END --rm --network $BUILD_TAG $DOCKER_ID/$DOCKER_IMAGE_FRONT_END:$DOCKER_TAG'
-                sh 'docker stop $DOCKER_IMAGE_FRONT_END'
-                sh 'docker run -d --name $DOCKER_IMAGE_ORDERS --rm --network $BUILD_TAG $DOCKER_ID/$DOCKER_IMAGE_ORDERS:$DOCKER_TAG'
-                sh 'docker stop $DOCKER_IMAGE_ORDERS'
-                sh 'docker run -d --name $DOCKER_IMAGE_PAYMENT --rm --network $BUILD_TAG $DOCKER_ID/$DOCKER_IMAGE_PAYMENT:$DOCKER_TAG'
-                sh 'docker stop $DOCKER_IMAGE_PAYMENT'
-                sh 'docker run -d --name $DOCKER_IMAGE_QUEUE --rm --network $BUILD_TAG $DOCKER_ID/$DOCKER_IMAGE_QUEUE:$DOCKER_TAG'
-                sh 'docker stop $DOCKER_IMAGE_QUEUE'
-                sh 'docker run -d --name $DOCKER_IMAGE_SHIPPING --rm --network $BUILD_TAG $DOCKER_ID/$DOCKER_IMAGE_SHIPPING:$DOCKER_TAG'
-                sh 'docker stop $DOCKER_IMAGE_SHIPPING'
-                sh 'docker run -d --name $DOCKER_IMAGE_USER --rm --network $BUILD_TAG $DOCKER_ID/$DOCKER_IMAGE_USER:$DOCKER_TAG'
-                sh 'docker stop $DOCKER_IMAGE_USER'
-                sh 'docker run -d --name $DOCKER_IMAGE_USER_DB --rm --network $BUILD_TAG $DOCKER_ID/$DOCKER_IMAGE_USER_DB:$DOCKER_TAG'
-                sh 'docker stop  $DOCKER_IMAGE_USER_DB'
-                sh 'docker network rm $BUILD_TAG'
-            }
-        }
+
         stage('Push') {
             environment {
-                DOCKER_PASS = credentials("DOCKER_HUB_PASS")
+                DOCKER_ID = credentials('DOCKER_ID')
+                DOCKER_ID_SECRET = credentials('DOCKER_ID_SECRET')
             }
             steps {
                 sh 'docker image tag $DOCKER_ID/$DOCKER_IMAGE_CARTS:$DOCKER_TAG $DOCKER_ID/$DOCKER_IMAGE_CARTS:latest'
@@ -90,7 +63,7 @@ agent any
                 sh 'docker image tag $DOCKER_ID/$DOCKER_IMAGE_SHIPPING:$DOCKER_TAG $DOCKER_ID/$DOCKER_IMAGE_SHIPPING:latest'
                 sh 'docker image tag $DOCKER_ID/$DOCKER_IMAGE_USER:$DOCKER_TAG $DOCKER_ID/$DOCKER_IMAGE_USER:latest'
                 sh 'docker image tag $DOCKER_ID/$DOCKER_IMAGE_USER_DB:$DOCKER_TAG $DOCKER_ID/$DOCKER_IMAGE_USER_DB:latest'
-                sh 'docker login -u $DOCKER_ID -p $DOCKER_PASS'
+                sh 'docker login -u $DOCKER_ID -p $DOCKER_ID_SECRET'
                 sh 'docker push $DOCKER_ID/$DOCKER_IMAGE_CARTS:$DOCKER_TAG && docker push $DOCKER_ID/$DOCKER_IMAGE_CARTS:latest'
                 sh 'docker push $DOCKER_ID/$DOCKER_IMAGE_CATALOGUE:$DOCKER_TAG && docker push $DOCKER_ID/$DOCKER_IMAGE_CATALOGUE:latest'
                 sh 'docker push $DOCKER_ID/$DOCKER_IMAGE_CATALOGUE_DB:$DOCKER_TAG && docker push $DOCKER_ID/$DOCKER_IMAGE_CATALOGUE_DB:latest'
