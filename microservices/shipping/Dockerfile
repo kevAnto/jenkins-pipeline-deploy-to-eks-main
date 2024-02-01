@@ -1,1 +1,0 @@
-FROM weaveworksdemos/shipping:0.4.8

@@ -1,1 +1,0 @@
-FROM weaveworksdemos/catalogue-db:0.3.0

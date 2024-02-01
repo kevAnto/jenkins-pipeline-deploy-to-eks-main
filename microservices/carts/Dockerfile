@@ -1,1 +1,0 @@
-FROM weaveworksdemos/carts:0.4.8
