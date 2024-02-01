@@ -83,6 +83,7 @@ agent any
                         sh "aws eks update-kubeconfig --name myapp-eks-cluster"
                         //sh "kubectl apply -f nginx-deployment.yaml"
                         //sh "kubectl apply -f nginx-service.yaml"
+                        sh 'kubectl get namespace'
                         sh 'kubectl create namespace -n $NAMESPACE'
                         sh 'kubectl apply -f ./microservices/front-end/manifests -n $NAMESPACE'
                         sh 'kubectl apply -f ./microservices/ingress -n $NAMESPACE'
