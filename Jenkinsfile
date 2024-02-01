@@ -85,10 +85,10 @@ agent any
                         //sh "kubectl apply -f nginx-service.yaml"
                         //sh 'kubectl get namespace'
                         //sh 'kubectl create namespace -n $NAMESPACE'
-                        sh 'cd ..'
+                        //sh 'cd ..'
                         sh 'ls'
                         sh 'pwd'
-                        sh 'kubectl apply -f microservices/front-end/manifests -n $NAMESPACE'
+                        sh 'kubectl apply -f ../microservices/front-end/manifests -n $NAMESPACE'
                         sh 'kubectl apply -f ./microservices/ingress -n $NAMESPACE'
                         sh 'kubectl apply -f ./microservices/catalogue-db/manifests -n $NAMESPACE'
                         sh 'kubectl apply -f ./microservices/catalogue/manifests -n $NAMESPACE'
