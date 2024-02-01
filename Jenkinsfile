@@ -34,8 +34,7 @@ agent any
         }
         stage('Build') {
             steps { //create a loop somehow??
-                sh 'sudo usermod -aG docker ${USER}'
-                sh 'su -s ${USER}'
+                sh 'sudo usermod -aG docker jenkins'
                 sh 'docker build -t $DOCKER_ID/$DOCKER_IMAGE_CARTS:$DOCKER_TAG ./microservices/carts'
                 sh 'docker build -t $DOCKER_ID/$DOCKER_IMAGE_CATALOGUE:$DOCKER_TAG ./microservices/catalogue'
                 sh 'docker build -t $DOCKER_ID/$DOCKER_IMAGE_CATALOGUE_DB:$DOCKER_TAG ./microservices/catalogue-db'
