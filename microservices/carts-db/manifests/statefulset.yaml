@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: carts-db
+spec:
+  selector:
+    matchLabels:
+      app: carts-db
+  serviceName: carts-db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: carts-db
+    spec:
+      containers:
+        - name: carts-db
+          image: mongo:3.4
+          ports:
+            - containerPort: 27017
+              name: mongo
+          securityContext:
+            capabilities:
+              drop: 
+                - all
+              add:
+                - CHOWN
+                - SETGID
+                - SETUID
