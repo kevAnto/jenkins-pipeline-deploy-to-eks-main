@@ -20,6 +20,17 @@ pipeline {
         NAMESPACE = "sock-shop"
     }
 agent any
+    stage("Create an EKS Cluster") {
+            steps {
+                script {
+                    dir('terraform') {
+                        sh "terraform init -reconfigure"
+                        sh "terraform init"
+                        sh "terraform apply -auto-approve"
+                    }
+                }
+            }
+        }
     stages {
         stage('Build') {
             steps { //create a loop somehow??
