@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: catalogue
-          image: m0ph/catalogue:latest
+          image: kevanto/catalogue:latest
           command: ["/app"]
           args:
             - -port=80

@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: shipping
-          image: m0ph/shipping:latest
+          image: kevanto/shipping:latest
           ports:
             - containerPort: 80
           securityContext:

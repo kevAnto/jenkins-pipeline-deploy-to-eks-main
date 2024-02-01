@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: user
-          image: m0ph/user:latest
+          image: kevanto/user:latest
           ports:
             - containerPort: 80
           securityContext:

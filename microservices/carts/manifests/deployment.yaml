@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: carts
-          image: m0ph/carts:latest
+          image: kevanto/carts:latest
           ports:
             - containerPort: 80
           securityContext:

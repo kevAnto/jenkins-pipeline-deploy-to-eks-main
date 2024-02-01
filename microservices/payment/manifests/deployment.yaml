@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: payment
-          image: m0ph/payment:latest
+          image: kevanto/payment:latest
           ports:
             - containerPort: 8080
           securityContext:

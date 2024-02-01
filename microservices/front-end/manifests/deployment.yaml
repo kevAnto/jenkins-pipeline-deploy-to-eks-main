@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: m0ph/front-end:latest
+          image: kevanto/front-end:latest
           ports:
             - containerPort: 8079
           securityContext:

@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: catalogue-db
-          image: m0ph/catalogue-db:latest
+          image: kevanto/catalogue-db:latest
           ports:
             - containerPort: 3306
               name: mysql
