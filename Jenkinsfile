@@ -102,28 +102,5 @@ agent any
                 }
             }
         }
-        
-            steps{
-                sh 'rm -Rf .kube'
-                sh 'mkdir .kube'
-                sh 'cat $KUBECONFIG > .kube/config'
-                sh 'kubectl apply -f ./microservices/front-end/manifests -n $NAMESPACE'
-                sh 'kubectl apply -f ./microservices/ingress -n $NAMESPACE'
-                sh 'kubectl apply -f ./microservices/catalogue-db/manifests -n $NAMESPACE'
-                sh 'kubectl apply -f ./microservices/catalogue/manifests -n $NAMESPACE'
-                sh 'kubectl apply -f ./microservices/carts-db/manifests -n $NAMESPACE'
-                sh 'kubectl apply -f ./microservices/carts/manifests -n $NAMESPACE'
-                sh 'kubectl apply -f ./microservices/queue-master/manifests -n $NAMESPACE'
-                sh 'kubectl apply -f ./microservices/rabbitmq/manifests -n $NAMESPACE'
-                sh 'kubectl apply -f ./microservices/user-db/manifests -n $NAMESPACE'
-                sh 'kubectl apply -f ./microservices/user/manifests -n $NAMESPACE'
-                sh 'kubectl apply -f ./microservices/orders-db/manifests -n $NAMESPACE'
-                sh 'kubectl apply -f ./microservices/orders/manifests -n $NAMESPACE'
-                sh 'kubectl apply -f ./microservices/payment/manifests -n $NAMESPACE'
-                sh 'kubectl apply -f ./microservices/shipping/manifests -n $NAMESPACE'
-            }
-            
-
-        }
     }
 }
