@@ -4,9 +4,9 @@
 terraform {
 
   backend "s3" {
-    bucket = "tf-remote-sock-shop"
-    key = "terraform.tfstate" 
-    region = "eu-west-3" 
+    bucket = "remote-state-app"
+    key = "eks/terraform.tfstate" 
+    region = "us-east-1" 
     #access_key = "xxxxxxxxxxxxxxxx" # the access key created for the user who will be used by terraform
     #secret_key = "xxxxxxxxxxxxxxxx" # the secret key created for the user who will be used by terraform
   }
