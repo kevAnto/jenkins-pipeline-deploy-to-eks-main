@@ -86,7 +86,6 @@ agent any
                         //sh "kubectl apply -f nginx-service.yaml"
                         //sh 'kubectl get namespace'
                         sh 'kubectl create namespace $NAMESPACE'
-                        sh 'kubectl apply -f ../microservices/aws-lb-ctrl/aws-lb-ctrl-sa.yaml.bak -n $NAMESPACE'
                         sh 'kubectl apply -f ../microservices/front-end/manifests -n $NAMESPACE'
                         sh 'kubectl apply -f ../microservices/ingress -n $NAMESPACE'
                         sh 'kubectl apply -f ../microservices/catalogue-db/manifests -n $NAMESPACE'
