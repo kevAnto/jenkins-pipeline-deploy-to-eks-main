@@ -25,7 +25,7 @@ agent any
             steps {
                 script {
                     dir('terraform') {
-                        sh "terraform init -reconfigure"
+                        //sh "terraform init -reconfigure"
                         //sh "terraform init"
                         sh "terraform init -upgrade" 
                         sh "terraform apply -auto-approve"
