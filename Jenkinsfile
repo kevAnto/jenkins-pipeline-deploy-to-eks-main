@@ -28,7 +28,7 @@ agent any
                         //sh "terraform init -reconfigure"
                         //sh "terraform init"
                         sh "terraform init -upgrade" 
-                        sh "terraform apply -auto-approve"
+                        sh "terraform destroy -auto-approve"
                     }
                 }
             }
