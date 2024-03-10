@@ -1,4 +1,4 @@
-data "aws_caller_identity" "" {}
+data "aws_caller_identity" "current" {}
 
 resource "aws_iam_policy" "lb_ctrl_policy" {
   name = "TfEKSLbCtrlPolicy"
