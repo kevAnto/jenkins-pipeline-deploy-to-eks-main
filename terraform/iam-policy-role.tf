@@ -246,29 +246,29 @@ resource "aws_iam_policy" "lb_ctrl_policy" {
 })
 }
 
-# resource "aws_iam_role" "lb_role_trust" {
-#     name = "TfEKSLbCtrlRole"
-#     assume_role_policy = jsondecode({
-#     "Version": "2012-10-17",
-#     "Statement": [
-#         {
-#             "Effect": "Allow",
-#             "Principal": {
-#                 "Federated": "${aws_iam_openid_connect_provider.eks_oidc.arn}"
-#             },
-#             "Action": "sts:AssumeRoleWithWebIdentity",
-#             "Condition": {
-#                 "StringEquals": {
-#                     "${module.eks.oidc_provider}:aud": "sts.amazonaws.com",
-#                     "${module.eks.oidc_provider}:sub": "system:serviceaccount:kube-system:aws-load-balancer-controller"
-#                 }
-#             }
-#         }
-#     ]
-# })
-# }
+resource "aws_iam_role" "lb_role_trust" {
+    name = "TfEKSLbCtrlRole"
+    assume_role_policy = jsondecode({
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Federated": "${aws_iam_openid_connect_provider.eks_oidc.arn}"
+            },
+            "Action": "sts:AssumeRoleWithWebIdentity",
+            "Condition": {
+                "StringEquals": {
+                    "${module.eks.oidc_provider}:aud": "sts.amazonaws.com",
+                    "${module.eks.oidc_provider}:sub": "system:serviceaccount:kube-system:aws-load-balancer-controller"
+                }
+            }
+        }
+    ]
+})
+}
 
 resource "aws_iam_role_policy_attachment" "lb_att_policy" {
-    role = aws_iam_role.lb_role_trust
+    role = aws_iam_role.lb_role_trust.arn
     policy_arn = aws_iam_policy.lb_ctrl_policy.arn
 }
